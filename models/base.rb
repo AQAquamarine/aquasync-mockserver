@@ -61,10 +61,12 @@ module Aquasync
         end
 
         def aq_commit_deltas(deltas)
-          deltas.each {|delta| negotiate_delta(delta) }
+          deltas.each {|delta| commit_delta(delta) }
         end
 
-        def negotiate_delta(delta)
+        # commits a delta.
+        # @param [Hash] A Delta
+        def commit_delta(delta)
           record = find_by(gid: delta["gid"])
           if record
             record.resolve_conflict(delta)
@@ -73,11 +75,13 @@ module Aquasync
           end
         end
 
+        # @param [Hash] A Delta
         def create_record_from_delta(delta)
           create(delta)
         end
       end
 
+      # @param [Hash] A Delta
       def resolve_conflict(delta)
         self.update_attributes(delta) if delta["localTimestamp"] > self.localTimestamp
       end
