@@ -46,6 +46,7 @@ module Aquasync
         self.deviceToken.try(:downcase!)
       end
 
+      # sets UST current UNIX timestamp
       def set_ust
         self.ust = Time.now.to_i
       end
