@@ -1,4 +1,4 @@
-aquasync-mockserver
+Aquasync-Backend-Ruby
 ===================
 
-A mock server for Aquasync.
+A backend for [Aquasync protocol](https://github.com/AQAquamarine/aquasync-protocol) implemented in Ruby with Sinatra.
