@@ -23,7 +23,7 @@ module Aquasync
       end
 
       def to_h
-        serializable_hash
+        serializable_hash.select {|key, value| key != "_id"}
       end
     end
   end
