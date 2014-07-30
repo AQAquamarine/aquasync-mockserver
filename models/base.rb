@@ -21,6 +21,10 @@ module Aquasync
       def _name
         self.class.collection_name
       end
+
+      def to_h
+        serializable_hash
+      end
     end
   end
 end
