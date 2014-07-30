@@ -17,6 +17,10 @@ module Aquasync
       def set_ust
         self.ust = Time.now.to_i
       end
+
+      def _name
+        self.class.collection_name
+      end
     end
   end
 end
