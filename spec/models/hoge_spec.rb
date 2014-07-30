@@ -18,6 +18,10 @@ describe Hoge do
   end
 
   context "validation" do
+    it("does not allow nil for :gid") {
+      expect(hoge.valid?).to eq false
+    }
+
     it("allows lowercase UUID values for :gid") {
       hoge.gid = "550e8400-e29b-41d4-a716-446655440000"
       expect(hoge.valid?).to eq true

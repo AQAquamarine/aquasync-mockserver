@@ -1,5 +1,6 @@
 require 'mongoid'
 require 'active_support/concern'
+require 'active_support/core_ext'
 
 module Aquasync
   module Base
@@ -16,7 +17,9 @@ module Aquasync
       field :isDeleted, type: Boolean
 
       # UUID like 550e8400-e29b-41d4-a716-446655440000
+      validates_presence_of :gid
       validates :gid, format: { with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
+      validates_presence_of :ust
 
       before_validation do
         downcase_gid
@@ -24,7 +27,7 @@ module Aquasync
       end
 
       def downcase_gid
-        self.gid.downcase!
+        self.gid.try(:downcase!)
       end
 
       def set_ust
