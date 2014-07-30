@@ -10,7 +10,6 @@ module Aquasync
       include Mongoid::Document
 
       field :ust, type: Integer
-      field :isDirty, type: Boolean
       field :localTimestamp, type: DateTime
       field :gid, type: String
       field :deviceToken, type: String
