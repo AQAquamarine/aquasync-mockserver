@@ -1,4 +1,5 @@
 require 'simple_uuid'
+require 'json'
 
 class DeltaPackBuilder
   # delta_pack: Hash
@@ -15,14 +16,22 @@ class DeltaPackBuilder
     self.delta_pack[name].push document.to_h
   end
 
+  def push_documents(documents)
+    documents.each {|d| push(d)}
+  end
+
+  def json
+    delta_pack.to_json
+  end
+
+  def pretty_json
+    JSON.pretty_generate(delta_pack)
+  end
+
   private
 
   def initialize_array(name)
     self.delta_pack[name] = [] unless self.delta_pack[name]
-  end
-
-  def push_documents(documents)
-    documents.each {|d| push(d)}
   end
 
   # @return UUIDv1

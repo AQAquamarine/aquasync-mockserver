@@ -1,6 +1,8 @@
 require 'sinatra'
 require 'json'
 require_relative 'initializer/mongoid'
+require_relative 'spec/hoge'
+require_relative 'lib/delta_pack_builder'
 
 get '/deltas/from::ust' do
   content_type :json
@@ -34,6 +36,10 @@ get '/deltas/from::ust' do
         }
       ]
   }.to_json
+
+  builder = DeltaPackBuilder.new
+  builder.push_documents Hoge.all
+  builder.json
 end
 
 post '/deltas' do
