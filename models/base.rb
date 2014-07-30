@@ -32,6 +32,8 @@ module Aquasync
       validates_format_of :deviceToken, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
       validates_presence_of :localTimestamp
 
+      # MARK - CALLBACKS
+
       before_validation do
         downcase_gid
         downcase_device_token
@@ -49,6 +51,35 @@ module Aquasync
       # sets UST current UNIX timestamp
       def set_ust
         self.ust = Time.now.to_i
+      end
+
+      # MARK - Aggregated methods
+
+      class << self
+        def aq_deltas(ust)
+          where(:ust.gt => ust)
+        end
+
+        def aq_commit_deltas(deltas)
+          deltas.each {|delta| negotiate_delta(delta) }
+        end
+
+        def negotiate_delta(delta)
+          record = find_by(gid: delta["gid"])
+          if record
+            record.resolve_conflict(delta)
+          else
+            create_record_from_delta(delta)
+          end
+        end
+
+        def create_record_from_delta(delta)
+          # [PLACEHOLD]
+        end
+      end
+
+      def resolve_conflict(delta)
+        # [PLACEHOLD]
       end
 
       # returns its class name. Hoge for "Hoge".
