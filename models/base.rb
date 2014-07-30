@@ -1,7 +1,7 @@
 require 'mongoid'
 require 'active_support/concern'
 require 'active_support/core_ext'
-require_relative 'concerns/aquasync_model_callbacks'
+require_relative 'concerns/aquasync_callbacks'
 require_relative 'concerns/aquasync_aggregated_methods'
 
 module Aquasync
@@ -34,7 +34,7 @@ module Aquasync
       validates_format_of :deviceToken, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
       validates_presence_of :localTimestamp
 
-      include Aquasync::ModelCallbacks
+      include Aquasync::Callbacks
       include Aquasync::AggregatedMethods
 
       # returns its class name. Hoge for "Hoge".

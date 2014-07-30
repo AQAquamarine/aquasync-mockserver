@@ -1,7 +1,7 @@
 require 'active_support/concern'
 
 module Aquasync
-  module ModelCallbacks
+  module Callbacks
     extend ActiveSupport::Concern
 
     included do
