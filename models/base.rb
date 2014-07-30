@@ -74,7 +74,7 @@ module Aquasync
         end
 
         def create_record_from_delta(delta)
-          # [PLACEHOLD]
+          create(delta)
         end
       end
 
