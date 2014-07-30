@@ -18,7 +18,24 @@ describe Hoge do
   end
 
   context "validation" do
+    before(:each) do
+      hoge.deviceToken = "dddddddd-e29b-41d4-a716-446655dd0000"
+      hoge.gid = "550e8400-e29b-41d4-a716-446655440000"
+      hoge.localTimestamp = 1234567789
+    end
+
     it("does not allow nil for :gid") {
+      hoge.gid = nil
+      expect(hoge.valid?).to eq false
+    }
+
+    it("does not allow nil for :deviceToken") {
+      hoge.deviceToken = nil
+      expect(hoge.valid?).to eq false
+    }
+
+    it("does not allow nil for :localTimestamp") {
+      hoge.localTimestamp = nil
       expect(hoge.valid?).to eq false
     }
 

@@ -15,10 +15,12 @@ module Aquasync
       field :deviceToken, type: String
       field :isDeleted, type: Boolean
 
-      # UUID like 550e8400-e29b-41d4-a716-446655440000
       validates_presence_of :gid
+      # UUID like 550e8400-e29b-41d4-a716-446655440000
       validates :gid, format: { with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
       validates_presence_of :ust
+      validates_presence_of :deviceToken
+      validates_presence_of :localTimestamp
 
       before_validation do
         downcase_gid
