@@ -79,7 +79,7 @@ module Aquasync
       end
 
       def resolve_conflict(delta)
-        # [PLACEHOLD]
+        self.update_attributes(delta) if delta["localTimestamp"] > self.localTimestamp
       end
 
       # returns its class name. Hoge for "Hoge".
