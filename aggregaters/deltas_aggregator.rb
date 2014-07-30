@@ -12,9 +12,11 @@ class DeltasAggregator
 
   # Adds target models to aggregate.
   # @param klass [Aquasync::Base]
-  def regist_model_manager(klass)
-    name = klass.name
-    model_managers[name] = klass
+  def regist_model_manager(*klasses)
+    klasses.each do |klass|
+      name = klass.name
+      model_managers[name] = klass
+    end
   end
 
   # Returns registered model manager from name.

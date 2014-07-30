@@ -5,7 +5,7 @@ describe DeltasAggregator do
 
   context "#pack_deltas" do
     let(:delta_pack) {
-      aggregator.regist_model_manager(Hoge)
+      aggregator.regist_model_manager(Hoge, Huga)
       aggregator.pack_deltas(122345)
     }
 
