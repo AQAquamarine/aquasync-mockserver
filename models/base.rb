@@ -16,9 +16,9 @@ module Aquasync
       field :isDeleted, type: Boolean
 
       # UUID like 550e8400-e29b-41d4-a716-446655440000
-      validates :gid, format: { with: /^([0-9abcdef].*-?)$/}
+      validates :gid, format: { with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/ }
 
-      before_save do
+      before_validation do
         downcase_gid
         set_ust
       end
