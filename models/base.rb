@@ -9,18 +9,26 @@ module Aquasync
     included do
       include Mongoid::Document
 
+      # should be UNIX timestamp
+      # @example 1406697904
       field :ust, type: Integer
-      field :localTimestamp, type: DateTime
+      # should be UNIX timestamp
+      # @example 1406697904
+      field :localTimestamp, type: Integer
+      # should be UUIDv1
+      # @example 550e8400-e29b-41d4-a716-446655440000
       field :gid, type: String
+      # should be UUIDv1
+      # @example 550e8400-e29b-41d4-a716-446655440000
       field :deviceToken, type: String
+      # for paranoid deletion
+      # @example false
       field :isDeleted, type: Boolean
 
       validates_presence_of :gid
-      # UUID like 550e8400-e29b-41d4-a716-446655440000
       validates_format_of :gid, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
       validates_presence_of :ust
       validates_presence_of :deviceToken
-      # UUID like 550e8400-e29b-41d4-a716-446655440000
       validates_format_of :deviceToken, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
       validates_presence_of :localTimestamp
 
@@ -42,12 +50,16 @@ module Aquasync
         self.ust = Time.now.to_i
       end
 
+      # returns its collection name in lower case. Like Hoge for :hoges.
+      # @return [Symbol]
       def _name
         self.class.collection_name
       end
 
+      # returns serialized hash whose _id is excluded.
+      # @return [Hash]
       def to_h
-        serializable_hash.select {|key, value| key != "_id"}
+        serializable_hash.delete_if {|key| key == "_id" or key == "ust"}
       end
     end
   end

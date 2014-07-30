@@ -58,6 +58,7 @@ describe Hoge do
 
   context "#to_h" do
     it("does not include _id") { expect(hoge.to_h).not_to include "_id"}
+    it("does not include ust") { expect(hoge.to_h).not_to include "ust" }
   end
 
   context "#_name" do
