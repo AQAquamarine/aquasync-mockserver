@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'json'
+require_relative 'initializer/mongoid'
 
 get '/deltas/from::ust' do
   content_type :json
