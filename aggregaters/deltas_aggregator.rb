@@ -11,7 +11,7 @@ class DeltasAggregator
   end
 
   # Adds target models to aggregate.
-  # @param klass [DeltaManagedModel]
+  # @param klass [AquasyncModel]
   def regist_model_manager(klass)
     name = klass.name
     model_managers[name] = klass
@@ -19,7 +19,7 @@ class DeltasAggregator
 
   # Returns registered model manager from name.
   # @param [String] name
-  # @return [DeltaManagedModel]
+  # @return [AquasyncModel]
   def model_manager_class(name)
     model_managers[name]
   end
