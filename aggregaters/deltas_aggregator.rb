@@ -1,3 +1,5 @@
+require_relative '../lib/delta_pack_builder'
+
 # Has responsibility to
 # 1. Commit a DeltaPack to registered models.
 # 2. Pack a DeltaPack from registered models.
@@ -15,6 +17,13 @@ class DeltasAggregator
     model_managers[name] = klass
   end
 
+  # Returns registered model manager from name.
+  # @param [String] name
+  # @return [DeltaManagedModel]
+  def model_manager_class(name)
+    model_managers[name]
+  end
+
   # Unpacks a DeltaPack and delegates #aq_commit_deltas to registered model managers.
   # @param [Hash] A DeltaPack (https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md)
   def unpack_and_commit_delta_pack(delta_pack)
@@ -28,15 +37,10 @@ class DeltasAggregator
   # Packs deltas collected from registered model managers via #aq_deltas to DeltaPack.
   # @return [Hash] A DeltaPack (https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md)
   def pack_deltas
-    model_managers.map do |model_manager|
-      model_manager.aq_deltas
+    builder = DeltaPackBuilder.new
+    model_managers.each do |model_manager|
+      builder.push_documents model_manager.aq_deltas
     end
-  end
-
-  # Returns registered model manager from name.
-  # @param [String] name
-  # @return [DeltaManagedModel]
-  def model_manager_class(name)
-    model_managers[name]
+    builder.delta_pack
   end
 end
