@@ -31,7 +31,7 @@ class DeltasAggregator
     unpacked_deltas.each do |model_name, deltas|
       manager = model_manager_class(model_name)
       manager.aq_commit_deltas deltas
-    end
+    end # [TODO] raise error if any commit failed.
   end
 
   # Packs deltas collected from registered model managers via #aq_deltas to DeltaPack.

@@ -6,7 +6,7 @@ class DeltaPackUnpacker
   end
 
   def unpack(delta_pack)
-    self.id = delta_pack["_id"]
+    self.id = delta_pack["_id"].downcase
     delta_pack.each do |key, value|
       next if key == "_id"
       deltas[key] = value
