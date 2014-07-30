@@ -43,5 +43,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport
   mongoid
   sinatra

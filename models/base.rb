@@ -1,17 +1,22 @@
 require 'mongoid'
+require 'active_support/concern'
 
 module Aquasync
-  class Base
-    include Mongoid::Document
+  module Base
+    extend ActiveSupport::Concern
 
-    field :ust, type: Integer
+    included do
+      include Mongoid::Document
 
-    before_save do
-      set_ust
-    end
+      field :ust, type: Integer
 
-    def set_ust
-      self.ust = Time.now.to_i
+      before_save do
+        set_ust
+      end
+
+      def set_ust
+        self.ust = Time.now.to_i
+      end
     end
   end
 end
