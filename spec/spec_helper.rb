@@ -6,6 +6,7 @@ require_relative '../initializer/mongoid'
 require_relative '../lib/delta_pack_builder'
 require_relative 'hoge'
 require_relative 'huga'
+require_relative '../lib/delta_pack_unpacker'
 
 def valid_hoge
   hoge = Hoge.new
