@@ -38,13 +38,20 @@ describe Hoge do
       hoge.localTimestamp = nil
       expect(hoge.valid?).to eq false
     }
-
     it("allows lowercase UUID values for :gid") {
       hoge.gid = "550e8400-e29b-41d4-a716-446655440000"
       expect(hoge.valid?).to eq true
     }
     it("does not allow not-UUID value for :gid") {
       hoge.gid = "hugahuga"
+      expect(hoge.valid?).to eq false
+    }
+    it("allows lowercase UUID values for :deviceToken") {
+      hoge.deviceToken = "550e8400-e29b-41d4-a716-446655440000"
+      expect(hoge.valid?).to eq true
+    }
+    it("does not allow not-UUID value for :deviceToken") {
+      hoge.deviceToken = "hugahuga"
       expect(hoge.valid?).to eq false
     }
   end
