@@ -3,8 +3,8 @@ require 'rspec'
 ENV['RACK_ENV'] = "test"
 
 require_relative '../initializer/mongoid'
-require_relative '../models/hoge.rb'
 require_relative '../lib/delta_pack_builder'
+require_relative 'hoge'
 require_relative 'huga'
 
 def valid_hoge
