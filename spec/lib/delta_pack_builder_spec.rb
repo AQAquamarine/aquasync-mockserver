@@ -21,6 +21,6 @@ describe DeltaPackBuilder do
   end
 
   context '#uuid' do
-    it("returns UUID") { expect(builder).not_to eq nil }
+    it("returns UUID") { expect(builder.send(:uuid)).not_to eq nil }
   end
 end
