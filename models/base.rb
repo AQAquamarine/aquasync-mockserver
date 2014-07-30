@@ -51,10 +51,10 @@ module Aquasync
         self.ust = Time.now.to_i
       end
 
-      # returns its collection name in lower case. Like Hoge for :hoges.
+      # returns its class name. Hoge for "Hoge".
       # @return [Symbol]
       def _name
-        self.class.collection_name
+        self.class.name
       end
 
       # returns serialized hash whose _id is excluded.

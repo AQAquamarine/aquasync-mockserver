@@ -62,6 +62,6 @@ describe Hoge do
   end
 
   context "#_name" do
-    it { expect(hoge._name).to eq :hoges }
+    it { expect(hoge._name).to eq "Hoge" }
   end
 end

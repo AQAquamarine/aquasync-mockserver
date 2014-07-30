@@ -14,10 +14,10 @@ describe DeltaPackBuilder do
     end
 
     it { expect(builder.delta_pack).to include "_id" }
-    it { expect(builder.delta_pack).to include :hoges }
-    it { expect(builder.delta_pack).to include :hugas }
-    it { expect(builder.delta_pack[:hoges].size).to eq 3 }
-    it { expect(builder.delta_pack[:hugas].size).to eq 1 }
+    it { expect(builder.delta_pack).to include "Hoge" }
+    it { expect(builder.delta_pack).to include "Huga" }
+    it { expect(builder.delta_pack["Hoge"].size).to eq 3 }
+    it { expect(builder.delta_pack["Huga"].size).to eq 1 }
   end
 
   context '#uuid' do
