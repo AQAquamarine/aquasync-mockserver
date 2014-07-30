@@ -11,7 +11,7 @@ class DeltasAggregator
   end
 
   # Adds target models to aggregate.
-  # @param klass [AquasyncModel]
+  # @param klass [Aquasync::Base]
   def regist_model_manager(klass)
     name = klass.name
     model_managers[name] = klass
@@ -19,7 +19,7 @@ class DeltasAggregator
 
   # Returns registered model manager from name.
   # @param [String] name
-  # @return [AquasyncModel]
+  # @return [Aquasync::Base]
   def model_manager_class(name)
     model_managers[name]
   end
@@ -35,11 +35,12 @@ class DeltasAggregator
   end
 
   # Packs deltas collected from registered model managers via #aq_deltas to DeltaPack.
+  # @param [Integer] from_ust latestUST
   # @return [Hash] A DeltaPack (https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md)
-  def pack_deltas
+  def pack_deltas(from_ust)
     builder = DeltaPackBuilder.new
-    model_managers.each do |model_manager|
-      builder.push_documents model_manager.aq_deltas
+    model_managers.each do |model_name, model_manager|
+      builder.push_documents model_manager.aq_deltas(from_ust)
     end
     builder.delta_pack
   end

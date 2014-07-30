@@ -12,10 +12,12 @@ module Aquasync
     end
 
     module ClassMethods
+      # DeltasAggregator requirement
       def aq_deltas(ust)
         where(:ust.gt => ust)
       end
 
+      # DeltasAggregator requirement
       def aq_commit_deltas(deltas)
         deltas.each {|delta| commit_delta(delta) }
       end
