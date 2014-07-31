@@ -5,6 +5,7 @@ gem "mongoid"
 gem "activesupport"
 gem "simple_uuid"
 gem "activerecord"
+gem "yard"
 
 group :test do
   gem 'rspec'

@@ -1,6 +1,7 @@
 require 'simple_uuid'
 require 'json'
 
+# Has a responsibility to build a DeltaPack hash.
 class DeltaPackBuilder
   # delta_pack: Hash
   attr_accessor :delta_pack
@@ -17,7 +18,7 @@ class DeltaPackBuilder
     self.delta_pack[name].push document.to_h
   end
 
-  # @param document [Collection<Aquasync::Base>] resources which inherits Aquasync::Base
+  # @param documents [Array] resources which inherits Aquasync::Base
   def push_documents(documents)
     documents.each {|d| push(d)}
   end
