@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'activesupport', ["~> 4.0"]
   gem.add_dependency 'simple_uuid', ["~> 0.4"]
   gem.add_dependency 'activerecord', ["~> 4.0"]
-  gem.add_development_dependency 'rspec', ["~> 2.0"]
+  gem.add_development_dependency 'rspec', ["~> 3.0"]
   gem.add_development_dependency 'guard-rspec', ["~>4.3"]
   gem.add_development_dependency 'factory_girl', ["~> 4.4"]
   gem.add_development_dependency 'database_cleaner', ["~> 1.3"]
