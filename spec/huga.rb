@@ -1,4 +1,4 @@
-require_relative '../models/base'
+require_relative '../lib/models/base'
 
 class Huga
   include Aquasync::Base
