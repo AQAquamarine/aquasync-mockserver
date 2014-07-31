@@ -6,9 +6,10 @@ gem "activesupport"
 gem "simple_uuid"
 gem "activerecord"
 gem "yard"
-gem "factory_girl"
 
 group :test do
   gem 'rspec'
   gem 'guard-rspec'
+  gem "factory_girl"
+  gem "database_cleaner"
 end
