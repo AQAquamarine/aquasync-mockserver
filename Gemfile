@@ -6,6 +6,7 @@ gem "activesupport"
 gem "simple_uuid"
 gem "activerecord"
 gem "yard"
+gem "factory_girl"
 
 group :test do
   gem 'rspec'
