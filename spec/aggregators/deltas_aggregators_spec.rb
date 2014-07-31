@@ -3,6 +3,12 @@ require_relative '../spec_helper'
 describe DeltasAggregator do
   let(:aggregator) { DeltasAggregator.new }
 
+  before(:all) do
+    valid_hoge.save
+    valid_hoge.save
+    valid_huga.save
+  end
+
   context "#pack_deltas" do
     let(:delta_pack) {
       aggregator.regist_model_manager(Hoge, Huga)
