@@ -3,6 +3,10 @@ aquasync_model
 
 [![Gem Version](https://badge.fury.io/rb/aquasync_model.svg)](http://badge.fury.io/rb/aquasync_model)
 
+A module to mixin [Aquasync Model](https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md) requirements.
+
+### Example
+
 ```rb
 require 'aquasync_model'
 
@@ -13,7 +17,7 @@ class Book
 end
 ```
 
-Then it automatically mixin fields, callbacks, validators to satisfy [AquasyncModel](https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md) requirement.
+Then it automatically mixin fields, callbacks, validators to satisfy [Aquasync Model](https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md) requirement.
 
 ### Fields
 
