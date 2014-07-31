@@ -3,6 +3,15 @@ require_relative '../lib/delta_pack_builder'
 # Has responsibility to
 # 1. Commit a DeltaPack to registered models.
 # 2. Pack a DeltaPack from registered models.
+# @author kaiinui
+# @example Initialization
+#   aggregator = DeltasAggregator.new
+#   aggregator.regist_model_manager(Book, Author)
+# @example Obtain a DeltaPack from registered models.
+#   aggregator.pack_deltas
+# @example Commit a DeltaPack to registered models.
+#   aggregator.unpack_and_commit_delta_pack(delta_pack)
+# @note Please implement #aq_deltas and #aq_commit_deltas to models. (DeltasAggregator requirement.)
 class DeltasAggregator
   attr_accessor :model_managers
 
@@ -12,6 +21,7 @@ class DeltasAggregator
 
   # Adds target models to aggregate.
   # @param klass [Aquasync::Base]
+  # @return [NilClass]
   def regist_model_manager(*klasses)
     klasses.each do |klass|
       name = klass.name
@@ -28,6 +38,7 @@ class DeltasAggregator
 
   # Unpacks a DeltaPack and delegates #aq_commit_deltas to registered model managers.
   # @param [Hash] A DeltaPack (https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md)
+  # @return [NilClass]
   def unpack_and_commit_delta_pack(delta_pack)
     unpacked_deltas = DeltaPackUnpacker.new.unpack(delta_pack).deltas
     unpacked_deltas.each do |model_name, deltas|

@@ -3,6 +3,7 @@ require 'active_support/concern'
 module Aquasync
   # Has a responsibility to implement Aquasync::DeltasAggregator requirement.
   # @author kaiinui
+  # @see DeltasAggregator
   module AggregatedMethods
     extend ActiveSupport::Concern
 

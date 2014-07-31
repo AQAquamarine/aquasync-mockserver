@@ -3,6 +3,7 @@ require 'active_support/concern'
 module Aquasync
   # Has a responsibility to implement DeltaPackBuilder requirement.
   # @author kaiinui
+  # @see DeltaPackBuilder
   module DeltaPackMethods
     extend ActiveSupport::Concern
 

@@ -7,7 +7,7 @@ require_relative '../lib/delta_pack_builder'
 require_relative 'hoge'
 require_relative 'huga'
 require_relative '../lib/delta_pack_unpacker'
-require_relative '../aggregaters/deltas_aggregator'
+require_relative '../aggregators/deltas_aggregator'
 
 def valid_hoge
   hoge = Hoge.new
