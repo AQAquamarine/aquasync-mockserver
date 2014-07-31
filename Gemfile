@@ -7,7 +7,7 @@ gem "simple_uuid"
 gem "activerecord"
 gem "yard"
 
-gem "aquasync_model"
+gem "aquasync_model", path: "."
 
 group :test do
   gem 'rspec'

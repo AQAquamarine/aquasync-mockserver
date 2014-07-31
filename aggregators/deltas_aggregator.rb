@@ -1,4 +1,4 @@
-require_relative '../lib/delta_pack_builder'
+require_relative '../delta_pack/delta_pack_builder'
 
 # Has responsibility to
 # 1. Commit a DeltaPack to registered models.

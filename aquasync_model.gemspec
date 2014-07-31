@@ -20,5 +20,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency 'factory_girl', ["~> 4.4"]
   gem.add_development_dependency 'database_cleaner', ["~> 1.3"]
 
-  gem.files = `git ls-files -z`.split("\0")
+  gem.files = ["lib/models/base.rb", "lib/models/concerns/aquasync_aggregated_methods.rb", "lib/models/concerns/aquasync_callbacks.rb", "lib/models/concerns/aquasync_delta_pack_methods.rb", "lib/validators/aquasync_validator.rb"]
 end
