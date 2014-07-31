@@ -18,9 +18,9 @@ def valid_hoge
 end
 
 def valid_huga
-  hoge = Huga.new
-  hoge.deviceToken = "dddddddd-e29b-41d4-a716-446655dd0000"
-  hoge.gid = "550e8400-e29b-41d4-a716-446655440000"
-  hoge.localTimestamp = 1234567789
-  hoge
+  huga = Huga.new
+  huga.deviceToken = "dddddddd-e29b-41d4-a716-446655dd0000"
+  huga.gid = "550e8400-e29b-41d4-a716-446655440000"
+  huga.localTimestamp = 1234567789
+  huga
 end
