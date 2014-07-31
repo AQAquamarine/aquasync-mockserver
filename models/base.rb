@@ -3,6 +3,7 @@ require 'active_support/concern'
 require 'active_support/core_ext'
 require_relative 'concerns/aquasync_callbacks'
 require_relative 'concerns/aquasync_aggregated_methods'
+require_relative 'concerns/aquasync_delta_pack_methods'
 
 module Aquasync
   module Base
@@ -36,18 +37,7 @@ module Aquasync
 
       include Aquasync::Callbacks
       include Aquasync::AggregatedMethods
-
-      # returns its class name. Hoge for "Hoge".
-      # @return [Symbol]
-      def _name
-        self.class.name
-      end
-
-      # returns serialized hash whose _id is excluded.
-      # @return [Hash]
-      def to_h
-        serializable_hash.delete_if {|key| key == "_id" or key == "ust"}
-      end
+      include Aquasync::DeltaPackMethods
     end
   end
 end
