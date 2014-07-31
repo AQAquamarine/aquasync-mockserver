@@ -16,6 +16,7 @@ class DeltaPackBuilder
   def initialize
     self.delta_pack = {}
     self.delta_pack["_id"] = uuid
+    self.delta_pack["latestUST"] = 0
   end
 
   # pushes a document into a DeltaPack.
@@ -24,12 +25,27 @@ class DeltaPackBuilder
     name = document._name
     initialize_array(name)
     self.delta_pack[name].push document.to_h
+    update_ust(document)
   end
 
   # pushes documents into a DeltaPack.
   # @param documents [Array] resources which inherits Aquasync::Base
   def push_documents(documents)
     documents.each {|d| push(d)}
+  end
+
+  # updates latestUST
+  # @param document [Aquasync::Base]
+  def update_ust(document)
+    if document.ust > latest_ust
+      self.delta_pack["latestUST"] = document.ust
+    end
+  end
+
+  # returns latestUST of current DeltaPack
+  # @return [Integer]
+  def latest_ust
+    self.delta_pack["latestUST"]
   end
 
   # returns built DeltaPack represented in JSON

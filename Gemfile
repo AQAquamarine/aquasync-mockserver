@@ -7,6 +7,8 @@ gem "simple_uuid"
 gem "activerecord"
 gem "yard"
 
+gem "aquasync_model"
+
 group :test do
   gem 'rspec'
   gem 'guard-rspec'

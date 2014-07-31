@@ -1,19 +1,28 @@
 require_relative '../spec_helper'
 
 describe DeltaPackBuilder do
+  before(:context) {
+    DatabaseCleaner.clean
+
+    valid_hoge.save
+    valid_hoge.save
+    valid_hoge.save
+    valid_huga.save
+  }
+
   let(:builder) { DeltaPackBuilder.new }
 
-  context "#push" do
+  describe "#push" do
+    before(:each) do
+      builder.push_documents Hoge.all
+      builder.push_documents Huga.all
+    end
     let(:hoge) { valid_hoge }
     let(:huga) { valid_huga }
-    before(:each) do
-      builder.push hoge
-      builder.push hoge
-      builder.push hoge
-      builder.push huga
-    end
+    let(:ust) { huga.ust }
 
     it { expect(builder.delta_pack).to include "_id" }
+    it { expect(builder.delta_pack).to include "latestUST" }
     it { expect(builder.delta_pack).to include "Hoge" }
     it { expect(builder.delta_pack).to include "Huga" }
     it { expect(builder.delta_pack["Hoge"].size).to eq 3 }
