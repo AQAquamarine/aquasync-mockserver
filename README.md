@@ -1,59 +1,77 @@
-Aquasync-Backend-Ruby
+aquasync_model
 ===================
 
-A backend for [Aquasync protocol](https://github.com/AQAquamarine/aquasync-protocol) implemented in Ruby with Sinatra.
+[![Gem Version](https://badge.fury.io/rb/aquasync_model.svg)](http://badge.fury.io/rb/aquasync_model)
 
-Endpoints
----
+```rb
+require 'aquasync_model'
 
-The backend respond to POST /deltas for push and GET /deltas/from::ust for pull.
+class Book
+  include Aquasync::Base
 
-###POST /deltas
-
-Receives a [DeltaPack](https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md) in request body and returns a result.
-
-`example: POST /deltas`
-
-```json
-// EXAMPLE RESULT
-{
-  "result": "200"
-  "id": "SUCCESS"
-}
+  field :name
+end
 ```
 
-###GET /deltas/from::ust
+Then it automatically mixin fields, callbacks, validators to satisfy [AquasyncModel](https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md) requirement.
 
-`example: GET /deltas/from:123456789`
+### Fields
 
-Returns a [DeltaPack](https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md) with `Content-Type:application/json;`
+```rb
+# should be UNIX timestamp
+# @example 1406697904
+field :ust, type: Integer
+# should be UNIX timestamp
+# @example 1406697904
+field :localTimestamp, type: Integer
+# should be UUIDv1
+# @example 550e8400-e29b-41d4-a716-446655440000
+field :gid, type: String
+# should be UUIDv1
+# @example 550e8400-e29b-41d4-a716-446655440000
+field :deviceToken, type: String
+# for paranoid deletion
+# @example false
+field :isDeleted, type: Boolean
+```
 
-```json
-// EXAMPLE RESULT
-{
-  "_id": "0f72fa94-dae3-4d3c-8528-af25df5ff7c9",
-  "Book": [
-    {
-      "id": "0f72fa94-d0e3-497c-8528-af25df5ff7c9",
-      "name": "The Little Prince",
-      "author_name": "Taro Tanaka"
-    },
-    {
-      "id": "1f72fa94-d0e3-497c-8528-af25df5ff7c9",
-      "name": "Alice in Wonderland",
-      "author_name": "Bob Dylan"
-    },
-    {
-      "id": "2f72fa94-d0e3-497c-8528-af25df5ff7c9",
-      "name": "Harry Potter",
-      "author_name": "Charles Schwab"
-    }
-  ],
-  "Author": [
-    {
-      "id": "2c72fa94-d0e3-497c-8528-af25df5ff7c9",
-      "name": "Taro Tanaka"
-    }
-  ]
-}
+### Callbacks
+
+```rb
+before_validation do
+  downcase_gid
+  downcase_device_token
+  set_ust
+end
+```
+
+### Validations
+
+```rb
+validates_presence_of :gid
+validates_format_of :gid, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
+validates_presence_of :ust
+validates_presence_of :deviceToken
+validates_format_of :deviceToken, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
+validates_presence_of :localTimestamp
+```
+
+### Aquasync DeltasAggregator methods
+
+```rb
+def aq_deltas(ust)
+    where(:ust.gt => ust)
+end
+
+def aq_commit_deltas(deltas)
+    deltas.each {|delta| commit_delta(delta) }
+end
+```
+
+### Aquasync DeltaPack methods
+
+```rb
+def to_h
+  serializable_hash.delete_if {|key| key == "_id" or key == "ust"}
+end
 ```
