@@ -1,6 +1,5 @@
 require 'mongoid'
 require 'active_support/concern'
-require 'active_support/core_ext'
 require_relative 'concerns/aquasync_callbacks'
 require_relative 'concerns/aquasync_aggregated_methods'
 require_relative 'concerns/aquasync_delta_pack_methods'
