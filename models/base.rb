@@ -4,6 +4,7 @@ require 'active_support/core_ext'
 require_relative 'concerns/aquasync_callbacks'
 require_relative 'concerns/aquasync_aggregated_methods'
 require_relative 'concerns/aquasync_delta_pack_methods'
+require_relative '../validators/aquasync_validator'
 
 module Aquasync
   module Base
@@ -28,12 +29,7 @@ module Aquasync
       # @example false
       field :isDeleted, type: Boolean
 
-      validates_presence_of :gid
-      validates_format_of :gid, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
-      validates_presence_of :ust
-      validates_presence_of :deviceToken
-      validates_format_of :deviceToken, with: /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
-      validates_presence_of :localTimestamp
+      validates_with Aquasync::Validator
 
       include Aquasync::Callbacks
       include Aquasync::AggregatedMethods
