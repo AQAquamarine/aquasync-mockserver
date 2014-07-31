@@ -38,4 +38,32 @@ describe DeltasAggregator do
       it { expect(delta_pack["Huga"].try(:size) || 0).to eq 0 }
     end
   end
+
+  describe "#commit_delta_pack" do
+    context "when existed gid is given" do
+      context "when older latestUST is given" do
+        before(:each) do
+          aggregator.commit_delta_pack(older_ust_delta_pack)
+        end
+
+        it("should not update the record") { expect(Hoge.find_by(gid: "550e8400-e29b-41d4-a716-446655440000").hoge).to eq "before" }
+      end
+
+      context "when newer latestUST is given" do
+        before(:each) do
+          aggregator.commit_delta_pack(newer_ust_delta_pack)
+        end
+
+        it("should update the record") { expect(Hoge.find_by(gid: "550e8400-e29b-41d4-a716-446655440000").hoge).to eq "after" }
+      end
+    end
+
+    context "when unknown gid is given" do
+      before(:each) do
+        aggregator.commit_delta_pack(new_gid_delta_pack)
+      end
+
+      it("should save new record") { expect(Hoge.find_by(gid: "aaaaaaaa-e29b-41d4-a716-446655440000").hoge).to eq "new" }
+    end
+  end
 end

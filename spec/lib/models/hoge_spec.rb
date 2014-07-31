@@ -64,6 +64,4 @@ describe Hoge do
   context "#_name" do
     it { expect(hoge._name).to eq "Hoge" }
   end
-
-  it { puts Hoge.all.size }
 end

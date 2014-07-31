@@ -39,7 +39,7 @@ class DeltasAggregator
   # Unpacks a DeltaPack and delegates #aq_commit_deltas to registered model managers.
   # @param [Hash] A DeltaPack (https://github.com/AQAquamarine/aquasync-protocol/blob/master/deltapack.md)
   # @return [NilClass]
-  def unpack_and_commit_delta_pack(delta_pack)
+  def commit_delta_pack(delta_pack)
     unpacked_deltas = DeltaPackUnpacker.new.unpack(delta_pack).deltas
     unpacked_deltas.each do |model_name, deltas|
       manager = model_manager_class(model_name)
