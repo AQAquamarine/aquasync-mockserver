@@ -19,6 +19,25 @@ end
 
 Then it automatically mixin fields, callbacks, validators to satisfy [Aquasync Model](https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md) requirement.
 
+### Specs
+
+```
+#before_save
+  ust are set when saved
+  gid should be lowercase
+validation
+  does not allow nil for :gid
+  does not allow nil for :deviceToken
+  does not allow nil for :localTimestamp
+  allows lowercase UUID values for :gid
+  does not allow not-UUID value for :gid
+  allows lowercase UUID values for :deviceToken
+  does not allow not-UUID value for :deviceToken
+#to_h
+  does not include _id
+  does not include ust
+```
+
 ### Fields
 
 ```rb
