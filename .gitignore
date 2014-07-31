@@ -2,3 +2,4 @@
 config/mongoid.yml
 tmp
 doc
+.yardoc
