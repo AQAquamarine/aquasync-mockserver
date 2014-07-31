@@ -10,7 +10,7 @@ module Aquasync
         downcase_device_token
         set_ust
       end
-      
+
       # gid should be lowercase (https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md#aquasync-model)
       def downcase_gid
         self.gid.try(:downcase!)
