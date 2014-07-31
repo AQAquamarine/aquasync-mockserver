@@ -1,4 +1,5 @@
 # Has a responsibility to unpack a DeltaPack hash.
+# @author kaiinui
 class DeltaPackUnpacker
   # id [String] UUID
   attr_accessor :id

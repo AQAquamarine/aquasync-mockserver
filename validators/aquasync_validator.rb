@@ -1,6 +1,11 @@
 require 'active_model/validator'
 
 module Aquasync
+  # Has a responsibility to implement AquasyncModel validations.
+  # @see https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md
+  # @author kaiinui
+  # @example usage
+  #   validates_with Aquasync::Validator
   class Validator < ActiveModel::Validator
     def validate(record)
       record.validates_presence_of :gid

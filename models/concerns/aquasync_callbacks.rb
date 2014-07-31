@@ -2,6 +2,9 @@ require 'active_support/concern'
 require 'active_support/core_ext'
 
 module Aquasync
+  # Has a responsibility to implement format methods to obey AquasyncModel.
+  # @see https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md
+  # @author kaiinui
   module Callbacks
     extend ActiveSupport::Concern
 

@@ -2,6 +2,7 @@ require 'simple_uuid'
 require 'json'
 
 # Has a responsibility to build a DeltaPack hash.
+# @author kaiinui
 class DeltaPackBuilder
   # delta_pack: Hash
   attr_accessor :delta_pack

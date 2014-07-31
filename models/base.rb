@@ -6,6 +6,9 @@ require_relative 'concerns/aquasync_delta_pack_methods'
 require_relative '../validators/aquasync_validator'
 
 module Aquasync
+  # Is a concern to mixin AquasyncModel requirements.
+  # @see https://github.com/AQAquamarine/aquasync-protocol/blob/master/aquasync-model.md
+  # @author kaiinui
   module Base
     extend ActiveSupport::Concern
 
