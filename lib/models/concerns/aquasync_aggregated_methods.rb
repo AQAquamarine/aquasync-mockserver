@@ -10,7 +10,8 @@ module Aquasync
     included do
       # @param [Hash]
       def resolve_conflict(delta)
-        self.update_attributes(delta) if delta["localTimestamp"] > self.localTimestamp
+        raise "localTimestamp is nil" if delta["localTimestamp"] == nil
+        self.update_attributes!(delta) if delta["localTimestamp"] > self.localTimestamp
       end
     end
 
@@ -40,7 +41,7 @@ module Aquasync
 
       # @param [Hash]
       def create_record_from_delta(delta)
-        create(delta)
+        create!(delta)
       end
     end
   end
