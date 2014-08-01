@@ -64,4 +64,34 @@ describe Hoge do
   context "#_name" do
     it { expect(hoge._name).to eq "Hoge" }
   end
+
+  describe "#commit_delta" do
+    let(:wrong_delta) {
+      {
+          "gid" => "cccccccc-e29b-41d4-a716-446655440000",
+          "localTimestamp" => 1234567789,
+          "hoge" => "huga"
+      }
+    }
+    let(:valid_delta) {
+      {
+          "deviceToken" => "dddddddd-e29b-41d4-a716-446655dd0000",
+          "gid" => "550e8400-e29b-41d4-a716-446655440000",
+          "localTimestamp" => 1234567789,
+          "hoge" => "huga"
+      }
+    }
+
+    it {
+      expect {
+        Hoge.commit_delta(wrong_delta)
+      }.to raise_error
+    }
+
+    it {
+      expect {
+        Hoge.commit_delta(valid_delta)
+      }.to_not raise_error
+    }
+  end
 end

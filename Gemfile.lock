@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    aquasync_model (0.1.0)
+    aquasync_model (0.1.2)
       activerecord (~> 4.0)
       activesupport (~> 4.0)
       mongoid (~> 4.0)
