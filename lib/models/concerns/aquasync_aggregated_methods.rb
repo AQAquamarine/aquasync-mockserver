@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'active_support/inflector'
 
 module Aquasync
   # Has a responsibility to implement Aquasync::DeltasAggregator requirement.
@@ -18,30 +19,41 @@ module Aquasync
     module ClassMethods
       # DeltasAggregator requirement
       # @return [Array<Aquasync::Base>]
-      def aq_deltas(ust)
-        where(:ust.gt => ust)
+      def aq_deltas(ust, opts = {})
+        begin_of_association_chain(opts).where(:ust.gt => ust)
       end
 
       # DeltasAggregator requirement
       # @return [NilClass]
-      def aq_commit_deltas(deltas)
-        deltas.each {|delta| commit_delta(delta) }
+      def aq_commit_deltas(deltas, opts = {})
+        @_opts = opts
+        deltas.each {|delta| commit_delta(delta, opts) }
       end
 
       # commits a delta.
       # @param [Hash]
-      def commit_delta(delta)
-        record = find_by(gid: delta["gid"])
+      def commit_delta(delta, opts)
+        record = begin_of_association_chain(opts).find_by(gid: delta["gid"])
         if record
           record.resolve_conflict(delta)
         else
-          create_record_from_delta(delta)
+          create_record_from_delta(delta, opts)
         end
       end
 
       # @param [Hash]
-      def create_record_from_delta(delta)
-        create!(delta)
+      def create_record_from_delta(delta, opts)
+        begin_of_association_chain(opts).create!(delta)
+      end
+
+      def begin_of_association_chain(opts)
+        model = opts[:begin_of_association_chain]
+        if(model)
+          # current_user Book => current_user.books
+          model.send(self.downcase.pluralize)
+        else
+          self
+        end
       end
     end
   end

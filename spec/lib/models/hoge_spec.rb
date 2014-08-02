@@ -84,14 +84,24 @@ describe Hoge do
 
     it {
       expect {
-        Hoge.commit_delta(wrong_delta)
+        Hoge.commit_delta(wrong_delta, {})
       }.to raise_error
     }
 
     it {
       expect {
-        Hoge.commit_delta(valid_delta)
+        Hoge.commit_delta(valid_delta, {})
       }.to_not raise_error
+    }
+  end
+
+  describe "#aq_commit_deltas" do
+    let(:user) {
+      FactoryGirl.build(:user)
+    }
+
+    it {
+      expect(user.hoge.gid).to eq "aaaaaaaa-e29b-41d4-a716-446655440000"
     }
   end
 end

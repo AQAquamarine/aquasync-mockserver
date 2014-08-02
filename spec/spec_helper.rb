@@ -6,13 +6,17 @@ require 'database_cleaner'
 require 'active_support/core_ext'
 require 'factory_girl'
 
-require_relative 'factories/hoge'
-require_relative 'factories/huga'
-
 require_relative '../initializer/mongoid'
 
 require_relative 'hoge'
 require_relative 'huga'
+require_relative 'user'
+
+require_relative 'factories/hoge'
+require_relative 'factories/huga'
+require_relative 'factories/user'
+
+
 
 DatabaseCleaner.strategy = :truncation
 

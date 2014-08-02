@@ -4,4 +4,5 @@ class Hoge
   include Aquasync::Base
 
   field :hoge
+  belongs_to :user
 end
