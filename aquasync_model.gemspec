@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name    = 'aquasync_model'
-  gem.version = '0.1.2'
+  gem.version = '0.2.0'
   gem.date    = Date.today.to_s
 
   gem.summary = "A mixin model which implements Aquasync Model specification."
