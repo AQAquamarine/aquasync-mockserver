@@ -100,8 +100,15 @@ describe Hoge do
       FactoryGirl.build(:user)
     }
 
-    it {
-      expect(user.hoge.gid).to eq "aaaaaaaa-e29b-41d4-a716-446655440000"
-    }
+    context "when valid deltas are given" do
+      before(:each) do
+        user.save
+        Hoge.aq_commit_deltas(valid_deltas, begin_of_association_chain: user)
+      end
+
+      it {
+        expect(Hoge.aq_commit_deltas(valid_deltas, begin_of_association_chain: user))
+      }
+    end
   end
 end

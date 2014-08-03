@@ -50,7 +50,7 @@ module Aquasync
         model = opts[:begin_of_association_chain]
         if(model)
           # current_user Book => current_user.books
-          model.send(self.downcase.pluralize)
+          model.send(self.name.downcase.pluralize)
         else
           self
         end

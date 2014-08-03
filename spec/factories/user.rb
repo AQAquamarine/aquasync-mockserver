@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :user do
-    association :hoges, factory: :hoge
+    hoges { build_list :hoge, 3 }
   end
 end

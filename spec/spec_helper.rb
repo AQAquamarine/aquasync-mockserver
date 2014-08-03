@@ -69,3 +69,26 @@ def new_gid_delta_pack
       ]
   }
 end
+
+def valid_deltas
+  [
+      {
+          "deviceToken" => "550e8400-e29b-41d4-a716-446655dd0000",
+          "gid" => "acaaaaaa-e29b-41d4-a716-446655440000",
+          "localTimestamp" => 2034567789,
+          "hoge" => "new"
+      },
+      {
+          "deviceToken" => "550f8400-e29b-41d4-a716-446655dd0000",
+          "gid" => "acaaaaaa-e29b-41d4-a716-446655440000",
+          "localTimestamp" => 2034567789,
+          "hoge" => "new"
+      },
+      {
+          "deviceToken" => "550e8400-e29b-41d4-a716-446655dd0000",
+          "gid" => "adaaaaaa-e29b-41d4-a716-446655440000",
+          "localTimestamp" => 2034567789,
+          "hoge" => "new"
+      }
+  ]
+end
