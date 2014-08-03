@@ -107,7 +107,7 @@ describe Hoge do
       end
 
       it {
-        expect(Hoge.aq_commit_deltas(valid_deltas, begin_of_association_chain: user))
+        expect(user.hoges.size).to eq 6
       }
     end
   end

@@ -80,7 +80,7 @@ def valid_deltas
       },
       {
           "deviceToken" => "550f8400-e29b-41d4-a716-446655dd0000",
-          "gid" => "acaaaaaa-e29b-41d4-a716-446655440000",
+          "gid" => "abaaaaaa-e29b-41d4-a716-446655440000",
           "localTimestamp" => 2034567789,
           "hoge" => "new"
       },
