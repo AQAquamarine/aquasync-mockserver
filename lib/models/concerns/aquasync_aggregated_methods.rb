@@ -26,8 +26,21 @@ module Aquasync
       # DeltasAggregator requirement
       # @return [NilClass]
       def aq_commit_deltas(deltas, opts = {})
-        @_opts = opts
-        deltas.each {|delta| commit_delta(delta, opts) }
+        deltas.each {|d|
+          delta = append_attributes(d, opts)
+          commit_delta(delta, opts)
+        }
+      end
+
+      # Handle :append_attributes option.
+      # @param [Hash]
+      def append_attributes(delta, opts)
+        return delta unless opts[:append_attributes]
+        atr = opts[:append_attributes]
+        klass = self.name
+        delta.merge!(atr[:all]) if atr[:all]
+        delta.merge!(atr[klass]) if atr[klass]
+        delta
       end
 
       # commits a delta.

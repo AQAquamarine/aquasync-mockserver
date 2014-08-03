@@ -111,4 +111,21 @@ describe Hoge do
       }
     end
   end
+
+  describe "#append_attributes" do
+    let(:delta) {
+      {
+          "deviceToken" => "dddddddd-e29b-41d4-a716-446655dd0000",
+          "gid" => "550e8400-e29b-41d4-a716-446655440000",
+          "hoge" => "huga"
+      }
+    }
+    it("should append an attribute from :all ") {
+      expect(Hoge.append_attributes(delta, append_attributes: {all: {"localTimestamp" => 1234567789}})).to include "localTimestamp"
+    }
+
+    it("should append an attribute from 'Hoge'") {
+      expect(Hoge.append_attributes(delta, append_attributes: {'Hoge' => {"localTimestamp" => 1234567789}})).to include "localTimestamp"
+    }
+  end
 end
