@@ -12,7 +12,7 @@ module Aquasync
       # @param [Hash]
       def resolve_conflict(delta)
         raise "localTimestamp is nil" if delta["localTimestamp"] == nil
-        self.update_attributes!(delta) if delta["localTimestamp"] > self.localTimestamp
+        self.update_attributes!(delta) if delta["localTimestamp"].to_i > self.localTimestamp
       end
     end
 
