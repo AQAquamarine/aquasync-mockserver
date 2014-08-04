@@ -19,7 +19,7 @@ module Aquasync
       # *DeltaPackBuilder Requirement
       # @return [Hash]
       def to_h
-        serializable_hash.delete_if {|key| key == "_id" or key == "ust"}
+        serializable_hash.delete_if {|key| key == "_id" or key == "ust" or key == "user_id"} # https://github.com/AQAquamarine/aquasync-protocol/blob/master/q-user_id.md
       end
     end
   end
